@@ -1,18 +1,30 @@
 import React from 'react';
-import { Node } from 'data/nodes';
+import { Node as NodeType } from 'data/nodes';
+import Node from './Node';
 
 interface ListProps {
-  nodes: Node[];
+  nodes: NodeType[];
 }
 
 const List: React.FC<ListProps> = ({ nodes }) => {
+  const _nodes = nodes.sort((node) => node.status ? 0 : 1);
+
   return (
     <ul>
-      {nodes.map((node) => (
+      {_nodes.map((node) => (
         <li key={node.name}>
-          <pre>{JSON.stringify(node)}</pre>
+          <Node node={node} />
         </li>
       ))}
+      <style jsx>{`
+        ul {
+          padding: 0;
+          margin: 0;
+        }
+        li {
+          display: block;
+        }
+      `}</style>
     </ul>
   );
 };

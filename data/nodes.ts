@@ -14,6 +14,33 @@ const nodes: Node[] = [
     endpoint: `https://mainnet.infura.io/v3/${process.env.NEXT_APP_INFURA}`,
     website: 'https://infura.io/',
     status: true,
+    secret: true,
+  },
+  {
+    name: 'Alchemy',
+    endpoint: `https://eth-mainnet.alchemyapi.io/v2/${process.env.NEXT_APP_ALCHEMY}`,
+    website: 'https://alchemyapi.io/',
+    status: true,
+    secret: true,
+  },
+  {
+    name: 'MyCrypto',
+    endpoint: 'https://api.mycryptoapi.com/eth',
+    website: 'https://mycrypto.com/',
+    status: true,
+  },
+  {
+    name: '1inch',
+    endpoint: 'https://web3.1inch.exchange/',
+    website: 'https://1inch.exchange/',
+    status: true,
+  },
+  {
+    name: 'RIVET',
+    endpoint: `https://${process.env.NEXT_APP_RIVET}.eth.rpc.rivet.cloud/`,
+    website: 'https://rivet.cloud/',
+    status: true,
+    secret: true,
   },
   {
     name: 'Cloudflare',
