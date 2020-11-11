@@ -10,7 +10,10 @@ const Node: React.FC<NodeProps> = ({ node }) => {
 
   return (
     <div className={`node ${node.status ? 'up' : 'down'}`}>
-      <h2>{node.name}</h2>
+      <div className="top">
+        <h2>{node.name}</h2>
+        <span className="price">{node.price}</span>
+      </div>
       <div>
         <span className={`status ${node.status ? 'up' : 'down'}`}>
           {node.status ? 'Working' : 'Down'}
@@ -34,9 +37,18 @@ const Node: React.FC<NodeProps> = ({ node }) => {
         .node.down {
           color: #999999;
         }
+        .top {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+        }
         h2 {
           margin: 2px 0;
           font-size: 18px;
+        }
+        .price {
+          color: #999999;
+          font-size: 14px;
         }
         .status {
           display: inline-block;

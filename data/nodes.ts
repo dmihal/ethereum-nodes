@@ -3,6 +3,7 @@ import 'isomorphic-fetch';
 export interface Node {
   name: string;
   endpoint: string | null;
+  price?: string;
   secret?: boolean;
   website: string;
   status: boolean;
@@ -13,6 +14,7 @@ const nodes: Node[] = [
     name: 'Infura',
     endpoint: `https://mainnet.infura.io/v3/${process.env.NEXT_APP_INFURA}`,
     website: 'https://infura.io/',
+    price: 'Freemium',
     status: true,
     secret: true,
   },
@@ -20,6 +22,7 @@ const nodes: Node[] = [
     name: 'Alchemy',
     endpoint: `https://eth-mainnet.alchemyapi.io/v2/${process.env.NEXT_APP_ALCHEMY}`,
     website: 'https://alchemyapi.io/',
+    price: 'Freemium',
     status: true,
     secret: true,
   },
@@ -27,18 +30,21 @@ const nodes: Node[] = [
     name: 'MyCrypto',
     endpoint: 'https://api.mycryptoapi.com/eth',
     website: 'https://mycrypto.com/',
+    price: 'Free',
     status: true,
   },
   {
     name: '1inch',
     endpoint: 'https://web3.1inch.exchange/',
     website: 'https://1inch.exchange/',
+    price: 'Free',
     status: true,
   },
   {
     name: 'RIVET',
     endpoint: `https://${process.env.NEXT_APP_RIVET}.eth.rpc.rivet.cloud/`,
     website: 'https://rivet.cloud/',
+    price: 'Freemium',
     status: true,
     secret: true,
   },
@@ -46,24 +52,28 @@ const nodes: Node[] = [
     name: 'Pocket Network',
     endpoint: 'https://eth-mainnet.gateway.pokt.network/v1/5f3453978e354ab992c4da79',
     website: 'https://pokt.network/',
+    price: 'Freemium',
     status: true,
   },
   {
     name: 'Cloudflare',
     endpoint: 'https://cloudflare-eth.com/',
     website: 'https://cloudflare-eth.com/',
+    price: 'Free',
     status: true,
   },
   {
     name: 'Blockscout',
     endpoint: 'https://mainnet-nethermind.blockscout.com/',
     website: 'https://blockscout.com',
+    price: 'Free',
     status: true,
   },
   {
     name: 'AVADO',
     endpoint: 'https://mainnet.eth.cloud.ava.do/',
     website: 'https://ava.do',
+    price: 'Free',
     status: true,
   },
   {
@@ -77,6 +87,7 @@ const nodes: Node[] = [
     name: 'ArchiveNode',
     endpoint: `https://api.archivenode.io/${process.env.NEXT_APP_ARCHIVENODE}`,
     website: 'https://archivenode.io/',
+    price: 'Free',
     status: true,
     secret: true,
   },
