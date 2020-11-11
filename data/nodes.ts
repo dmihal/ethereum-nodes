@@ -61,12 +61,19 @@ const nodes: Node[] = [
     status: true,
   },
   {
+    name: 'Quiknode',
+    endpoint: `https://${process.env.NEXT_APP_QUIKNODE_NAME}.quiknode.pro/${process.env.NEXT_APP_QUIKNODE_KEY}/`,
+    website: 'https://www.quiknode.io/',
+    status: true,
+    secret: true,
+  },
+  {
     name: 'ArchiveNode',
     endpoint: `https://api.archivenode.io/${process.env.NEXT_APP_ARCHIVENODE}`,
     website: 'https://archivenode.io/',
     status: true,
     secret: true,
-  }
+  },
 ];
 
 async function checkNodeStatus(endpoint: string): Promise<boolean> {
