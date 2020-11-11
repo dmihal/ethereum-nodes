@@ -28,6 +28,8 @@ const Node: React.FC<NodeProps> = ({ node }) => {
           margin: 4px;
           padding: 8px;
           border: solid 1px #888888;
+          width: 250px;
+          height: 140px;
         }
         .node.down {
           color: #999999;
