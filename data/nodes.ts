@@ -121,10 +121,19 @@ async function checkNodeStatus(endpoint: string): Promise<boolean> {
 
 export function getNodes(): Promise<Node[]> {
   return Promise.all(nodes.map(async (node: Node) => {
-    return {
-      ...node,
-      status: await checkNodeStatus(node.endpoint!),
-      endpoint: node.secret ? null : node.endpoint,
-    };
+    try {
+      return {
+        ...node,
+        status: await checkNodeStatus(node.endpoint!),
+        endpoint: node.secret ? null : node.endpoint,
+      };
+    } catch (e) {
+      console.warn(e);
+      return {
+        ...node,
+        status: false,
+        endpoint: node.secret ? null : node.endpoint,
+      };
+    }
   }));
 }
