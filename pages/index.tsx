@@ -1,21 +1,21 @@
-import React/*, { useEffect }*/ from 'react';
+import React, { useEffect } from 'react';
 import Head from 'next/head';
 import { NextPage, GetServerSideProps } from 'next';
 import { getNodes, Node } from 'data/nodes';
 import List from 'components/List';
-// import ReactGA from 'react-ga';
+import ReactGA from 'react-ga';
 
 interface HomeProps {
   nodes: Node[];
 }
 
-// ReactGA.initialize("UA-150445352-3")
+ReactGA.initialize("G-186QH0S5W3")
 
 export const Home: NextPage<HomeProps> = ({ nodes }) => {
-  // useEffect(() => {
-  //   ReactGA.set({ page: window.location.pathname });
-  //   ReactGA.pageview(window.location.pathname);
-  // }, []);
+  useEffect(() => {
+    ReactGA.set({ page: window.location.pathname });
+    ReactGA.pageview(window.location.pathname);
+  }, []);
 
   return (
     <div className="container">
