@@ -70,6 +70,13 @@ const nodes: Node[] = [
     status: true,
   },
   {
+    name: 'MyEtherWallet',
+    endpoint: 'https://nodes.mewapi.io/rpc/eth',
+    website: 'https://myetherwallet.com/',
+    price: 'Free',
+    status: true,
+  },
+  {
     name: 'AVADO',
     endpoint: 'https://mainnet.eth.cloud.ava.do/',
     website: 'https://ava.do',
