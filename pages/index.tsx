@@ -1,22 +1,14 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Head from 'next/head';
 import { NextPage, GetServerSideProps } from 'next';
 import { getNodes, Node } from 'data/nodes';
 import List from 'components/List';
-import ReactGA from 'react-ga';
 
 interface HomeProps {
   nodes: Node[];
 }
 
-ReactGA.initialize("G-186QH0S5W3")
-
 export const Home: NextPage<HomeProps> = ({ nodes }) => {
-  useEffect(() => {
-    ReactGA.set({ page: window.location.pathname });
-    ReactGA.pageview(window.location.pathname);
-  }, []);
-
   return (
     <div className="container">
       <Head>
@@ -32,6 +24,14 @@ export const Home: NextPage<HomeProps> = ({ nodes }) => {
         <meta name="twitter:description" content="List of free Ethereum JSON-RPC endpoints" />
         <meta name="twitter:image" content={`https://ethereumnodes.com/api/screenshot?${(new Date()).getDate()}`} />
         <meta name="twitter:card" content="summary_large_image" />
+
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-186QH0S5W3" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());gtag('config', 'G-186QH0S5W3');`
+          }}
+        />
       </Head>
 
       <main>
