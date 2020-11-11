@@ -1,21 +1,21 @@
-import React, { useEffect } from 'react';
+import React/*, { useEffect }*/ from 'react';
 import Head from 'next/head';
 import { NextPage, GetServerSideProps } from 'next';
 import { getNodes, Node } from 'data/nodes';
 import List from 'components/List';
-import ReactGA from 'react-ga';
+// import ReactGA from 'react-ga';
 
 interface HomeProps {
-  data: Node[];
+  nodes: Node[];
 }
 
-ReactGA.initialize("UA-150445352-3")
+// ReactGA.initialize("UA-150445352-3")
 
-export const Home: NextPage<HomeProps> = ({ data }) => {
-  useEffect(() => {
-    ReactGA.set({ page: window.location.pathname });
-    ReactGA.pageview(window.location.pathname);
-  }, []);
+export const Home: NextPage<HomeProps> = ({ nodes }) => {
+  // useEffect(() => {
+  //   ReactGA.set({ page: window.location.pathname });
+  //   ReactGA.pageview(window.location.pathname);
+  // }, []);
 
   return (
     <div className="container">
@@ -43,15 +43,11 @@ export const Home: NextPage<HomeProps> = ({ data }) => {
           <script async src="https://platform.twitter.com/widgets.js"></script>
         </div>
 
-        <List data={data} />
+        <List nodes={nodes} />
       </main>
 
       <footer>
-        <div>Data updates at midnight, UTC</div>
-        <div>Network data from CoinMetrics, application data from The Graph</div>
-        <div>Application data does not include Ethereum transaction fees</div>
         <div>Created by <a href="https://twitter.com/dmihal" target="twitter">David Mihal</a></div>
-        <div>Design help from <a href="https://twitter.com/hey_heey_heeey" target="twitter">@heyheeyheeey</a></div>
       </footer>
 
       <style jsx>{`

@@ -1,19 +1,20 @@
-import * as React from 'react'
-import ListItem from './ListItem'
-import { User } from '../interfaces'
+import React from 'react';
+import { Node } from 'data/nodes';
 
-type Props = {
-  items: User[]
+interface ListProps {
+  nodes: Node[];
 }
 
-const List = ({ items }: Props) => (
-  <ul>
-    {items.map((item) => (
-      <li key={item.id}>
-        <ListItem data={item} />
-      </li>
-    ))}
-  </ul>
-)
+const List: React.FC<ListProps> = ({ nodes }) => {
+  return (
+    <ul>
+      {nodes.map((node) => (
+        <li key={node.name}>
+          <pre>{JSON.stringify(node)}</pre>
+        </li>
+      ))}
+    </ul>
+  );
+};
 
 export default List
