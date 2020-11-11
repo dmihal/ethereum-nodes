@@ -48,6 +48,25 @@ const nodes: Node[] = [
     website: 'https://cloudflare-eth.com/',
     status: true,
   },
+  {
+    name: 'Blockscout',
+    endpoint: 'https://mainnet-nethermind.blockscout.com/',
+    website: 'https://blockscout.com',
+    status: true,
+  },
+  {
+    name: 'AVADO',
+    endpoint: 'https://mainnet.eth.cloud.ava.do/',
+    website: 'https://ava.do',
+    status: true,
+  },
+  {
+    name: 'ArchiveNode',
+    endpoint: `https://api.archivenode.io/${process.env.NEXT_APP_ARCHIVENODE}`,
+    website: 'https://archivenode.io/',
+    status: true,
+    secret: true,
+  }
 ];
 
 async function checkNodeStatus(endpoint: string): Promise<boolean> {
