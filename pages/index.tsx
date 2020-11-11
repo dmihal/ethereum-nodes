@@ -24,13 +24,13 @@ export const Home: NextPage<HomeProps> = ({ nodes }) => {
         <link rel="icon" href="/favicon.png" />
         <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet" />
       
-        <meta property="og:title" content="Crypto Fees" />
-        <meta property="og:image" content="https://cryptofees.info/api/screenshot" />
-        <meta property="og:description" content="There's tons of crypto projects. Which ones are people actually paying to use?" />
+        <meta property="og:title" content="Ethereum Nodes" />
+        <meta property="og:image" content="https://ethereumnodes.com/api/screenshot" />
+        <meta property="og:description" content="List of free Ethereum JSON-RPC endpoints" />
 
-        <meta name="twitter:title" content="Crypto Fees" />
-        <meta name="twitter:description" content="There's tons of crypto projects. Which ones are people actually paying to use?" />
-        <meta name="twitter:image" content={`https://cryptofees.info/api/screenshot?${(new Date()).getDate()}`} />
+        <meta name="twitter:title" content="Ethereum Nodes" />
+        <meta name="twitter:description" content="List of free Ethereum JSON-RPC endpoints" />
+        <meta name="twitter:image" content={`https://ethereumnodes.com/api/screenshot?${(new Date()).getDate()}`} />
         <meta name="twitter:card" content="summary_large_image" />
       </Head>
 
