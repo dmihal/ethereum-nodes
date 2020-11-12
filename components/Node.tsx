@@ -19,7 +19,7 @@ const Node: React.FC<NodeProps> = ({ node }) => {
           {node.status ? 'Working' : 'Down'}
         </span>
       </div>
-      <div><a href={node.website}>{node.website}</a></div>
+      <div><a href={node.websiteURL || node.website}>{node.website}</a></div>
       <div>
         {node.endpoint ? (
           <input value={node.endpoint} className="endpoint" onClick={selectAll} />

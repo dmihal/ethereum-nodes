@@ -6,6 +6,7 @@ export interface Node {
   price?: string;
   secret?: boolean;
   website: string;
+  websiteURL?: string;
   status: boolean;
 }
 
@@ -22,6 +23,7 @@ const nodes: Node[] = [
     name: 'Alchemy',
     endpoint: `https://eth-mainnet.alchemyapi.io/v2/${process.env.NEXT_APP_ALCHEMY}`,
     website: 'https://alchemyapi.io/',
+    websiteURL: 'https://dashboard.alchemyapi.io/signup?referral=b9ca5e4c-a0cf-4b98-8735-6bca079da09b',
     price: 'Freemium',
     status: true,
     secret: true,
