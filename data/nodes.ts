@@ -77,6 +77,13 @@ const nodes: Node[] = [
     status: true,
   },
   {
+    name: 'LinkPool',
+    endpoint: 'https://main-rpc.linkpool.io/',
+    website: 'https://linkpool.io/',
+    price: 'Free',
+    status: true,
+  },
+  {
     name: 'AVADO',
     endpoint: 'https://mainnet.eth.cloud.ava.do/',
     website: 'https://ava.do',
