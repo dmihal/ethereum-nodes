@@ -116,6 +116,14 @@ const nodes: Node[] = [
     status: true,
     secret: true,
   },
+  {
+    name: 'Amberdata',
+    endpoint: `https://rpc.web3api.io?x-api-key=${process.env.NEXT_APP_AMBERDATA}`,
+    website: 'https://amberdata.io/',
+    price: 'Freemium',
+    status: true,
+    secret: true,
+  },
 ];
 
 async function checkNodeStatus(endpoint: string): Promise<boolean> {
