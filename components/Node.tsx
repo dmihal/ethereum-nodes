@@ -49,6 +49,8 @@ const Node: React.FC<NodeProps> = ({ node }) => {
         .price {
           color: #999999;
           font-size: 14px;
+          white-space: pre-line;
+          text-align: right;
         }
         .status {
           display: inline-block;

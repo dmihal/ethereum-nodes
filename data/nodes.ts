@@ -1,8 +1,10 @@
 import 'isomorphic-fetch';
+import base64 from 'base-64';
 
 export interface Node {
   name: string;
   endpoint: string | null;
+  authentication?: string;
   price?: string;
   secret?: boolean;
   website: string;
@@ -109,6 +111,15 @@ const nodes: Node[] = [
     secret: true,
   },
   {
+    name: 'Chainstack',
+    endpoint: `https://${process.env.NEXT_APP_CHAINSTACK_NODE}/`,
+    website: 'https://chainstack.com/',
+    price: 'Freemium\n(CC required)',
+    authentication: process.env.NEXT_APP_CHAINSTACK_AUTH,
+    status: true,
+    secret: true,
+  },
+  {
     name: 'ArchiveNode',
     endpoint: `https://api.archivenode.io/${process.env.NEXT_APP_ARCHIVENODE}`,
     website: 'https://archivenode.io/',
@@ -118,12 +129,15 @@ const nodes: Node[] = [
   },
 ];
 
-async function checkNodeStatus(endpoint: string): Promise<boolean> {
+async function checkNodeStatus(endpoint: string, authentication?: string): Promise<boolean> {
+  const headers: any = { 'Content-Type': 'application/json' };
+  if (authentication) {
+    headers['Authorization'] = `Basic ${base64.encode(authentication)}`
+  }
+
   const result = await fetch(endpoint, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
+    headers,
     body: JSON.stringify({
       id: "1",
       jsonrpc: "2.0",
@@ -140,7 +154,7 @@ export function getNodes(): Promise<Node[]> {
     try {
       return {
         ...node,
-        status: await checkNodeStatus(node.endpoint!),
+        status: await checkNodeStatus(node.endpoint!, node.authentication),
         endpoint: node.secret ? null : node.endpoint,
       };
     } catch (e) {
