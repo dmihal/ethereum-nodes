@@ -5,6 +5,7 @@ export interface Node {
   name: string;
   endpoint: string | null;
   authentication?: string;
+  archive?: boolean;
   price?: string;
   secret?: boolean;
   website: string;
@@ -27,6 +28,16 @@ const nodes: Node[] = [
     website: 'https://alchemyapi.io/',
     websiteURL: 'https://dashboard.alchemyapi.io/signup?referral=b9ca5e4c-a0cf-4b98-8735-6bca079da09b',
     price: 'Freemium',
+    archive: true,
+    status: true,
+    secret: true,
+  },
+  {
+    name: 'Moralis',
+    endpoint: `https://speedy-nodes-nyc.moralis.io/${process.env.MORALIS_KEY}/eth/mainnet/archive`,
+    website: 'https://moralis.io/',
+    price: 'Freemium',
+    archive: true,
     status: true,
     secret: true,
   },
@@ -124,6 +135,7 @@ const nodes: Node[] = [
     endpoint: `https://api.archivenode.io/${process.env.NEXT_APP_ARCHIVENODE}`,
     website: 'https://archivenode.io/',
     price: 'Free',
+    archive: true,
     status: true,
     secret: true,
   },
