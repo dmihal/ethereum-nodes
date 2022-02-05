@@ -4,7 +4,7 @@ import base64 from 'base-64';
 export interface Node {
   name: string;
   endpoint: string | null;
-  authentication?: string;
+  authentication?: string | null;
   archive?: boolean;
   price?: string;
   secret?: boolean;
@@ -52,6 +52,13 @@ const nodes: Node[] = [
     name: '1inch',
     endpoint: 'https://web3.1inch.exchange/',
     website: 'https://1inch.exchange/',
+    price: 'Free',
+    status: true,
+  },
+  {
+    name: 'Flashbots Protect',
+    endpoint: 'https://rpc.flashbots.net/',
+    website: 'https://flashbots.net',
     price: 'Free',
     status: true,
   },
@@ -126,7 +133,7 @@ const nodes: Node[] = [
     endpoint: `https://${process.env.NEXT_APP_CHAINSTACK_NODE}/`,
     website: 'https://chainstack.com/',
     price: 'Freemium\n(CC required)',
-    authentication: process.env.NEXT_APP_CHAINSTACK_AUTH,
+    authentication: process.env.NEXT_APP_CHAINSTACK_AUTH || null,
     status: true,
     secret: true,
   },
@@ -141,7 +148,7 @@ const nodes: Node[] = [
   },
 ];
 
-async function checkNodeStatus(endpoint: string, authentication?: string): Promise<boolean> {
+async function checkNodeStatus(endpoint: string, authentication?: string | null): Promise<boolean> {
   const headers: any = { 'Content-Type': 'application/json' };
   if (authentication) {
     headers['Authorization'] = `Basic ${base64.encode(authentication)}`

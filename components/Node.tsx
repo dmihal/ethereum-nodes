@@ -22,7 +22,7 @@ const Node: React.FC<NodeProps> = ({ node }) => {
       <div><a href={node.websiteURL || node.website}>{node.website}</a></div>
       <div>
         {node.endpoint ? (
-          <input value={node.endpoint} className="endpoint" onClick={selectAll} />
+          <input value={node.endpoint} readOnly className="endpoint" onClick={selectAll} />
         ) : 'Visit website to get API key'}
       </div>
 
