@@ -146,6 +146,13 @@ const nodes: Node[] = [
     status: true,
     secret: true,
   },
+  {
+    name: 'Flux',
+    endpoint: 'https://ethereumnodelight.app.runonflux.io',
+    website: 'https://runonflux.io/',
+    price: 'Free',
+    status: true,
+  },
 ];
 
 async function checkNodeStatus(endpoint: string, authentication?: string | null): Promise<boolean> {
