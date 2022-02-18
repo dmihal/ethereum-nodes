@@ -161,18 +161,24 @@ async function checkNodeStatus(endpoint: string, authentication?: string | null)
     headers['Authorization'] = `Basic ${base64.encode(authentication)}`
   }
 
-  const result = await fetch(endpoint, {
-    method: 'POST',
-    headers,
-    body: JSON.stringify({
-      id: "1",
-      jsonrpc: "2.0",
-      method: "eth_blockNumber",
-      params: [],
-    }),
-  });
-  const json = await result.json();
-  return !!json.result;
+  try {
+    const result = await fetch(endpoint, {
+      method: 'POST',
+      headers,
+      body: JSON.stringify({
+        id: "1",
+        jsonrpc: "2.0",
+        method: "eth_blockNumber",
+        params: [],
+      }),
+    });
+    const json = await result.json();
+
+    return !!json.result;
+  } catch (e: any) {
+    console.warn(e.message || e);
+    return false;
+  }
 }
 
 export function getNodes(): Promise<Node[]> {
