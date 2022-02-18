@@ -172,6 +172,11 @@ async function checkNodeStatus(endpoint: string, authentication?: string | null)
         params: [],
       }),
     });
+    if (result.status !== 200) {
+      console.log(endpoint, 'failed')
+      console.log(await result.text());
+      return false;
+    }
     const json = await result.json();
 
     return !!json.result;
