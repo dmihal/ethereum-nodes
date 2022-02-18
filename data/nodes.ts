@@ -49,13 +49,6 @@ const nodes: Node[] = [
     status: true,
   },
   {
-    name: '1inch',
-    endpoint: 'https://web3.1inch.exchange/',
-    website: 'https://1inch.exchange/',
-    price: 'Free',
-    status: true,
-  },
-  {
     name: 'Flashbots Protect',
     endpoint: 'https://rpc.flashbots.net/',
     website: 'https://flashbots.net',
