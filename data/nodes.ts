@@ -190,12 +190,22 @@ async function checkNodeStatus(endpoint: string, authentication?: string | null)
   }
 }
 
+function checkNodeStatusWithTimeout(endpoint: string, timeout: number, authentication?: string | null): Promise<boolean> {
+  return Promise.race([
+    checkNodeStatus(endpoint, authentication),
+    new Promise<boolean>((resolve) => setTimeout(() => {
+      console.warn(`${endpoint} timed out`);
+      resolve(false);
+    }, timeout))
+  ])
+}
+
 export function getNodes(): Promise<Node[]> {
   return Promise.all(nodes.map(async (node: Node) => {
     try {
       return {
         ...node,
-        status: await checkNodeStatus(node.endpoint!, node.authentication),
+        status: await checkNodeStatusWithTimeout(node.endpoint!, 4000, node.authentication),
         endpoint: node.secret ? null : node.endpoint,
       };
     } catch (e) {
