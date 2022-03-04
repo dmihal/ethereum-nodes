@@ -148,7 +148,15 @@ const nodes: Node[] = [
   },
 ];
 
+function finish(start: number, endpoint: string) {
+  const time = Date.now() - start;
+  if (time > 1000) {
+    console.log(`${endpoint} completed in ${time / 1000}s`)
+  }
+}
+
 async function checkNodeStatus(endpoint: string, authentication?: string | null): Promise<boolean> {
+  const start = Date.now();
   const headers: any = { 'Content-Type': 'application/json' };
   if (authentication) {
     headers['Authorization'] = `Basic ${base64.encode(authentication)}`
@@ -172,9 +180,12 @@ async function checkNodeStatus(endpoint: string, authentication?: string | null)
     }
     const json = await result.json();
 
+    finish(start, endpoint);
     return !!json.result;
   } catch (e: any) {
     console.warn(e.message || e);
+
+    finish(start, endpoint);
     return false;
   }
 }
