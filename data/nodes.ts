@@ -63,13 +63,13 @@ const nodes: Node[] = [
     status: true,
     secret: true,
   },
-  // {
-  //   name: 'Pocket Network',
-  //   endpoint: 'https://eth-mainnet.gateway.pokt.network/v1/5f3453978e354ab992c4da79',
-  //   website: 'https://pokt.network/',
-  //   price: 'Freemium',
-  //   status: true,
-  // },
+  {
+    name: 'Pocket Network',
+    endpoint: 'https://eth-mainnet.gateway.pokt.network/v1/5f3453978e354ab992c4da79',
+    website: 'https://pokt.network/',
+    price: 'Freemium',
+    status: true,
+  },
   {
     name: 'Cloudflare',
     endpoint: 'https://cloudflare-eth.com/',
