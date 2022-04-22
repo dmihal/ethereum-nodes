@@ -154,6 +154,14 @@ const nodes: Node[] = [
     status: true,
     secret: true,
   },
+  {
+    name: 'DataHub',
+    price: 'Freemium',
+    endpoint: `https://ethereum-mainnet--rpc.datahub.figment.io/apikey/${process.env.DATAHUB_API_KEY}`,
+    website: 'https://datahub.figment.io/',
+    status: true,
+    secret: true,
+  },
 ];
 
 function finish(start: number, endpoint: string) {
