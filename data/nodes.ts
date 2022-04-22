@@ -146,6 +146,14 @@ const nodes: Node[] = [
     price: 'Free',
     status: true,
   },
+  {
+    name: 'Omnia',
+    price: 'Free',
+    endpoint: `https://endpoints.omniatech.io/v1/eth/mainnet/${process.env.OMNIA_KEY}`,
+    website: 'https://omniatech.io/',
+    status: true,
+    secret: true,
+  },
 ];
 
 function finish(start: number, endpoint: string) {
