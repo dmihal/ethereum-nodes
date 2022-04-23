@@ -1,6 +1,6 @@
 import React from 'react';
 import Head from 'next/head';
-import { NextPage, GetServerSideProps } from 'next';
+import { NextPage, GetStaticProps } from 'next';
 import { getNodes, Node } from 'data/nodes';
 import List from 'components/List';
 
@@ -136,14 +136,10 @@ gtag('js', new Date());gtag('config', 'G-186QH0S5W3');`
 };
 
 
-export const getServerSideProps: GetServerSideProps = async ({ res }) => {
+export const getStaticProps: GetStaticProps<HomeProps> = async () => {
   const nodes = await getNodes();
 
-  if (res) {
-    res.setHeader('Cache-Control', 's-maxage=1800');
-  }
-
-  return { props: { nodes } };
+  return { props: { nodes, revalidate: 60 } };
 };
 
 export default Home
