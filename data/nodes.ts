@@ -106,9 +106,9 @@ const nodes: Node[] = [
     status: true,
   },
   {
-    name: 'Quiknode',
+    name: 'QuickNode',
     endpoint: `https://${process.env.NEXT_APP_QUIKNODE_NAME}.quiknode.pro/${process.env.NEXT_APP_QUIKNODE_KEY}/`,
-    website: 'https://www.quiknode.io/',
+    website: 'https://www.quicknode.io/',
     price: 'Paid',
     status: true,
     secret: true,
