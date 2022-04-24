@@ -154,6 +154,13 @@ const nodes: Node[] = [
     status: true,
     secret: true,
   },
+  {
+    name: 'Ankr',
+    price: 'free',
+    endpoint: 'https://rpc.ankr.com/eth',
+    website: 'https://ankr.com/',
+    status: true,
+  },
 ];
 
 function finish(start: number, endpoint: string) {
