@@ -18,7 +18,7 @@ const List: React.FC<ListProps> = ({ nodes }) => {
 
   return (
     <ul>
-      {_nodes.map((node, index) => (
+      {_nodes.map((node) => (
         <li key={node.name}>
           <Node node={node} />
         </li>

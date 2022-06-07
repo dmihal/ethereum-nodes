@@ -191,7 +191,12 @@ function finish(start: number, endpoint: string) {
   return time;
 }
 
-async function checkNodeStatus(endpoint: string, authentication?: string | null): Promise<any> {
+interface Status {
+  status: boolean
+  loadTime: number
+}
+
+async function checkNodeStatus(endpoint: string, authentication?: string | null): Promise<Status> {
   const start = Date.now();
   const headers: any = { 'Content-Type': 'application/json' };
   if (authentication) {
@@ -235,12 +240,12 @@ async function checkNodeStatus(endpoint: string, authentication?: string | null)
   }
 }
 
-function checkNodeStatusWithTimeout(endpoint: string, timeout: number, authentication?: string | null): Promise<boolean> {
+function checkNodeStatusWithTimeout(endpoint: string, timeout: number, authentication?: string | null) {
   return Promise.race([
     checkNodeStatus(endpoint, authentication),
-    new Promise<boolean>((resolve) => setTimeout(() => {
+    new Promise<Status>((resolve) => setTimeout(() => {
       console.warn(`${endpoint} timed out`);
-      resolve(false);
+      resolve({ status: false, loadTime: -1 });
     }, timeout))
   ])
 }
