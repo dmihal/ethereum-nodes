@@ -11,6 +11,7 @@ export interface Node {
   website: string;
   websiteURL?: string;
   status: boolean;
+  loadTime: number;
 }
 
 const nodes: Node[] = [
@@ -19,8 +20,9 @@ const nodes: Node[] = [
     endpoint: `https://mainnet.infura.io/v3/${process.env.NEXT_APP_INFURA}`,
     website: 'https://infura.io/',
     price: 'Freemium',
-    status: true,
+    status: false,
     secret: true,
+    loadTime: -1,
   },
   {
     name: 'Alchemy',
@@ -29,8 +31,9 @@ const nodes: Node[] = [
     websiteURL: 'https://dashboard.alchemyapi.io/signup?referral=b9ca5e4c-a0cf-4b98-8735-6bca079da09b',
     price: 'Freemium',
     archive: true,
-    status: true,
+    status: false,
     secret: true,
+    loadTime: -1,
   },
   {
     name: 'Moralis',
@@ -38,79 +41,90 @@ const nodes: Node[] = [
     website: 'https://moralis.io/',
     price: 'Freemium',
     archive: true,
-    status: true,
+    status: false,
     secret: true,
+    loadTime: -1,
   },
   {
     name: 'MyCrypto',
     endpoint: 'https://api.mycryptoapi.com/eth',
     website: 'https://mycrypto.com/',
     price: 'Free',
-    status: true,
+    status: false,
+    loadTime: -1,
   },
   {
     name: 'Flashbots Protect',
     endpoint: 'https://rpc.flashbots.net/',
     website: 'https://flashbots.net',
     price: 'Free',
-    status: true,
+    status: false,
+    loadTime: -1,
   },
   {
     name: 'RIVET',
     endpoint: `https://${process.env.NEXT_APP_RIVET}.eth.rpc.rivet.cloud/`,
     website: 'https://rivet.cloud/',
     price: 'Freemium',
-    status: true,
+    status: false,
     secret: true,
+    loadTime: -1,
   },
   {
     name: 'Pocket Network',
     endpoint: 'https://eth-mainnet.gateway.pokt.network/v1/5f3453978e354ab992c4da79',
     website: 'https://pokt.network/',
     price: 'Freemium',
-    status: true,
+    status: false,
+    loadTime: -1,
   },
   {
     name: 'Cloudflare',
     endpoint: 'https://cloudflare-eth.com/',
     website: 'https://cloudflare-eth.com/',
     price: 'Free',
-    status: true,
+    status: false,
+    loadTime: -1,
   },
   {
     name: 'Blockscout',
     endpoint: 'https://mainnet-nethermind.blockscout.com/',
     website: 'https://blockscout.com',
     price: 'Free',
-    status: true,
+    status: false,
+    loadTime: -1,
   },
   {
     name: 'MyEtherWallet',
     endpoint: 'https://nodes.mewapi.io/rpc/eth',
     website: 'https://myetherwallet.com/',
     price: 'Free',
-    status: true,
+    status: false,
+    loadTime: -1,
   },
   {
     name: 'LinkPool',
     endpoint: 'https://main-rpc.linkpool.io/',
     website: 'https://linkpool.io/',
     price: 'Free',
-    status: true,
+    status: false,
+    loadTime: -1,
   },
   {
     name: 'AVADO',
     endpoint: 'https://mainnet.eth.cloud.ava.do/',
     website: 'https://ava.do',
     price: 'Free',
-    status: true,
+    status: false,
+    loadTime: -1,
   },
   {
     name: 'QuickNode',
     endpoint: `https://${process.env.NEXT_APP_QUIKNODE_NAME}.quiknode.pro/${process.env.NEXT_APP_QUIKNODE_KEY}/`,
     website: 'https://quicknode.com/',
-    price: 'Paid',
-    status: true,
+    price: 'Free trial',
+    status: false,
+    loadTime: -1,
     secret: true,
   },
   {
@@ -118,7 +132,8 @@ const nodes: Node[] = [
     endpoint: `https://api.anyblock.tools/ethereum/ethereum/mainnet/rpc/${process.env.NEXT_APP_ANYBLOCK}/`,
     website: 'https://anyblock.tools/',
     price: 'Freemium',
-    status: true,
+    status: false,
+    loadTime: -1,
     secret: true,
   },
   {
@@ -127,7 +142,8 @@ const nodes: Node[] = [
     website: 'https://chainstack.com/',
     price: 'Freemium\n(CC required)',
     authentication: process.env.NEXT_APP_CHAINSTACK_AUTH || null,
-    status: true,
+    status: false,
+    loadTime: -1,
     secret: true,
   },
   {
@@ -136,7 +152,8 @@ const nodes: Node[] = [
     website: 'https://archivenode.io/',
     price: 'Free',
     archive: true,
-    status: true,
+    status: false,
+    loadTime: -1,
     secret: true,
   },
   {
@@ -144,14 +161,16 @@ const nodes: Node[] = [
     endpoint: 'https://ethereumnodelight.app.runonflux.io',
     website: 'https://runonflux.io/',
     price: 'Free',
-    status: true,
+    status: false,
+    loadTime: -1,
   },
   {
     name: 'Omnia',
     price: 'Free',
     endpoint: `https://endpoints.omniatech.io/v1/eth/mainnet/${process.env.OMNIA_KEY}`,
     website: 'https://omniatech.io/',
-    status: true,
+    status: false,
+    loadTime: -1,
     secret: true,
   },
   {
@@ -159,7 +178,8 @@ const nodes: Node[] = [
     price: 'free',
     endpoint: 'https://rpc.ankr.com/eth',
     website: 'https://ankr.com/',
-    status: true,
+    status: false,
+    loadTime: -1,
   },
 ];
 
@@ -168,9 +188,10 @@ function finish(start: number, endpoint: string) {
   if (time > 1000) {
     console.log(`${endpoint} completed in ${time / 1000}s`)
   }
+  return time;
 }
 
-async function checkNodeStatus(endpoint: string, authentication?: string | null): Promise<boolean> {
+async function checkNodeStatus(endpoint: string, authentication?: string | null): Promise<any> {
   const start = Date.now();
   const headers: any = { 'Content-Type': 'application/json' };
   if (authentication) {
@@ -191,17 +212,26 @@ async function checkNodeStatus(endpoint: string, authentication?: string | null)
     if (result.status !== 200) {
       console.log(endpoint, 'failed')
       console.log(await result.text());
-      return false;
+      return {
+        status: false,
+        loadTime: -1,
+      };
     }
     const json = await result.json();
 
-    finish(start, endpoint);
-    return !!json.result;
+    let loadTime = finish(start, endpoint);
+    return {
+      status: !!json.result,
+      loadTime
+    };
   } catch (e: any) {
     console.warn(e.message || e);
 
-    finish(start, endpoint);
-    return false;
+    let loadTime = finish(start, endpoint);
+    return {
+      status: false,
+      loadTime
+    };
   }
 }
 
@@ -218,9 +248,11 @@ function checkNodeStatusWithTimeout(endpoint: string, timeout: number, authentic
 export function getNodes(): Promise<Node[]> {
   return Promise.all(nodes.map(async (node: Node) => {
     try {
+      let nodeInfo = await checkNodeStatusWithTimeout(node.endpoint!, 4000, node.authentication)
       return {
         ...node,
-        status: await checkNodeStatusWithTimeout(node.endpoint!, 4000, node.authentication),
+        status: nodeInfo.status,
+        loadTime: nodeInfo.loadTime,
         endpoint: node.secret ? null : node.endpoint,
       };
     } catch (e) {
@@ -228,6 +260,7 @@ export function getNodes(): Promise<Node[]> {
       return {
         ...node,
         status: false,
+        loadTime: -1,
         endpoint: node.secret ? null : node.endpoint,
       };
     }

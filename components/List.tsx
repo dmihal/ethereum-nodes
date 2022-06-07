@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Node as NodeType } from 'data/nodes';
 import Node from './Node';
 
@@ -7,11 +7,18 @@ interface ListProps {
 }
 
 const List: React.FC<ListProps> = ({ nodes }) => {
-  const _nodes = nodes.sort((node) => node.status ? 0 : 1);
+  const [_nodes, setNodes] = useState(nodes);
+  useEffect(() => {
+    let infiniteNodes = nodes.filter((node) => node.loadTime === -1);
+    let sortedNodes = nodes.filter(
+      (node) => node.loadTime !== -1
+    ).sort((nodeA, nodeB) => nodeA.loadTime - nodeB.loadTime).sort(node => node.status ? 0 : 1);
+    setNodes([...sortedNodes, ...infiniteNodes]);
+  }, [nodes]);
 
   return (
     <ul>
-      {_nodes.map((node) => (
+      {_nodes.map((node, index) => (
         <li key={node.name}>
           <Node node={node} />
         </li>
