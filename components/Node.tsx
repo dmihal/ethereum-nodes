@@ -7,16 +7,19 @@ interface NodeProps {
 
 const Node: React.FC<NodeProps> = ({ node }) => {
   const selectAll = (event: any) => event.target.select();
+  const nodeStatus = node.status;
 
   return (
-    <div className={`node ${node.status ? 'up' : 'down'}`}>
+    <div className={`node ${nodeStatus ? 'up' : 'down'}`}>
       <div className="top">
         <h2>{node.name}</h2>
         <span className="price">{node.price}</span>
       </div>
       <div>
-        <span className={`status ${node.status ? 'up' : 'down'}`}>
-          {node.status ? 'Working' : 'Down'}
+        <span className="speed">Load time: {node.loadTime < 0 ? '∞' : `${node.loadTime}ms`}</span>
+        <br/>
+        <span className={`status ${nodeStatus ? 'up' : 'down'}`}>
+          {nodeStatus ? 'Working' : 'Down'}
         </span>
       </div>
       <div><a href={node.websiteURL || node.website}>{node.website}</a></div>
@@ -32,7 +35,7 @@ const Node: React.FC<NodeProps> = ({ node }) => {
           padding: 8px;
           border: solid 1px #888888;
           width: 250px;
-          height: 140px;
+          height: 165px;
         }
         .node.down {
           color: #999999;
@@ -55,6 +58,7 @@ const Node: React.FC<NodeProps> = ({ node }) => {
         .status {
           display: inline-block;
           padding: 4px 10px;
+          margin-top: 8px;
           border-radius: 20px;
           color: white;
         }
@@ -66,6 +70,12 @@ const Node: React.FC<NodeProps> = ({ node }) => {
         }
         .endpoint {
           width: 100%;
+        }
+        .speed {
+          font-size: 12px;
+          border: 1px solid #999999;
+          border-radius: 4px;
+          padding: 2px 3px;
         }
       `}</style>
     </div>
