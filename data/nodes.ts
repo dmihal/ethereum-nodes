@@ -204,16 +204,25 @@ async function checkNodeStatus(endpoint: string, authentication?: string | null)
   }
 
   try {
-    const result = await fetch(endpoint, {
-      method: 'POST',
-      headers,
-      body: JSON.stringify({
-        id: "1",
-        jsonrpc: "2.0",
-        method: "eth_blockNumber",
-        params: [],
-      }),
-    });
+    var result
+    try{
+      result = await fetch(endpoint, {
+        method: 'POST',
+        headers,
+        body: JSON.stringify({
+          id: "1",
+          jsonrpc: "2.0",
+          method: "eth_blockNumber",
+          params: [],
+        }),
+      })
+    }catch(err) {
+      return {
+        status: false,
+        loadTime: -1,
+      };
+    };
+    
     if (result.status !== 200) {
       console.log(endpoint, 'failed')
       console.log(await result.text());
