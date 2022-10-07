@@ -184,11 +184,10 @@ const nodes: Node[] = [
   {
     name: 'Nodereal',
     price: 'Freemium',
-    endpoint: `https://eth-mainnet.nodereal.io/v1/${process.env.NODEREAL_KEY}`,
+    endpoint: 'https://bsc-mainnet-us.nodereal.io/',
     website: 'https://nodereal.io/meganode',
     status: false,
     loadTime: -1,
-    secret: true,
   },
 ];
 
