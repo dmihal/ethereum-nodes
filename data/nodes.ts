@@ -184,7 +184,7 @@ const nodes: Node[] = [
   {
     name: 'Nodereal',
     price: 'Freemium',
-    endpoint: 'https://bsc-mainnet-us.nodereal.io/',
+    endpoint: 'https://bsc.nodereal.io/',
     website: 'https://nodereal.io/meganode',
     status: false,
     loadTime: -1,
