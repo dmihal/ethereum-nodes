@@ -1,6 +1,6 @@
 import React from 'react';
 import Head from 'next/head';
-import { NextPage, GetServerSideProps } from 'next';
+import { NextPage, GetStaticProps } from 'next';
 import { getNodes, Node } from 'data/nodes';
 import List from 'components/List';
 
@@ -136,7 +136,7 @@ gtag('js', new Date());gtag('config', 'G-186QH0S5W3');`
 };
 
 
-export const getServerSideProps: GetServerSideProps<HomeProps> = async () => {
+export const getStaticProps: GetStaticProps<HomeProps> = async () => {
   const nodes = await getNodes();
 
   return { props: { nodes, revalidate: 60 } };
