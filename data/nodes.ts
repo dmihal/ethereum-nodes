@@ -14,10 +14,18 @@ export interface Node {
   loadTime: number;
 }
 
+// Others to add:
+// https://ethereumnodelight.app.runonflux.io
+// https://eth-mainnet.nodereal.io/v1/
+// https://eth-mainnet.public.blastapi.io
+// https://api.securerpc.com/v1
+// https://eth-mainnet.rpcfast.com
+// https://1rpc.io/eth
+
 const nodes: Node[] = [
   {
     name: 'Infura',
-    endpoint: `https://mainnet.infura.io/v3/${process.env.NEXT_APP_INFURA}`,
+    endpoint: `https://mainnet.infura.io/v3/${process.env.INFURA_KEY}`,
     website: 'https://infura.io/',
     price: 'Freemium',
     status: false,
@@ -26,13 +34,21 @@ const nodes: Node[] = [
   },
   {
     name: 'Alchemy',
-    endpoint: `https://eth-mainnet.alchemyapi.io/v2/${process.env.NEXT_APP_ALCHEMY}`,
+    endpoint: `https://eth-mainnet.alchemyapi.io/v2/${process.env.ALCHEMY_KEY}`,
     website: 'https://alchemyapi.io/',
     websiteURL: 'https://dashboard.alchemyapi.io/signup?referral=b9ca5e4c-a0cf-4b98-8735-6bca079da09b',
     price: 'Freemium',
     archive: true,
     status: false,
     secret: true,
+    loadTime: -1,
+  },
+  {
+    name: 'Ankr',
+    endpoint: 'https://rpc.ankr.com/eth',
+    website: 'https://ankr.com/',
+    price: 'Free',
+    status: false,
     loadTime: -1,
   },
   {
@@ -63,7 +79,7 @@ const nodes: Node[] = [
   },
   {
     name: 'RIVET',
-    endpoint: `https://${process.env.NEXT_APP_RIVET}.eth.rpc.rivet.cloud/`,
+    endpoint: `https://${process.env.RIVET_KEY}.eth.rpc.rivet.cloud/`,
     website: 'https://rivet.cloud/',
     price: 'Freemium',
     status: false,
@@ -104,7 +120,7 @@ const nodes: Node[] = [
   },
   {
     name: 'LinkPool',
-    endpoint: 'https://main-rpc.linkpool.io/',
+    endpoint: 'https://main-light.eth.linkpool.io/',
     website: 'https://linkpool.io/',
     price: 'Free',
     status: false,
@@ -120,7 +136,7 @@ const nodes: Node[] = [
   },
   {
     name: 'QuickNode',
-    endpoint: `https://${process.env.NEXT_APP_QUIKNODE_NAME}.quiknode.pro/${process.env.NEXT_APP_QUIKNODE_KEY}/`,
+    endpoint: `https://${process.env.QUIKNODE_NAME}.discover.quiknode.pro/${process.env.QUIKNODE_KEY}/`,
     website: 'https://quicknode.com/',
     price: 'Free trial',
     status: false,
@@ -138,17 +154,17 @@ const nodes: Node[] = [
   },
   {
     name: 'Chainstack',
-    endpoint: `https://${process.env.NEXT_APP_CHAINSTACK_NODE}/`,
+    endpoint: `https://${process.env.CHAINSTACK_NODE}/`,
     website: 'https://chainstack.com/',
     price: 'Freemium\n(CC required)',
-    authentication: process.env.NEXT_APP_CHAINSTACK_AUTH || null,
+    authentication: process.env.CHAINSTACK_AUTH || null,
     status: false,
     loadTime: -1,
     secret: true,
   },
   {
     name: 'ArchiveNode',
-    endpoint: `https://api.archivenode.io/${process.env.NEXT_APP_ARCHIVENODE}`,
+    endpoint: `https://api.archivenode.io/${process.env.ARCHIVENODE_KEY}`,
     website: 'https://archivenode.io/',
     price: 'Free',
     archive: true,
@@ -172,14 +188,6 @@ const nodes: Node[] = [
     status: false,
     loadTime: -1,
     secret: true,
-  },
-  {
-    name: 'Ankr',
-    price: 'free',
-    endpoint: 'https://rpc.ankr.com/eth',
-    website: 'https://ankr.com/',
-    status: false,
-    loadTime: -1,
   },
   {
     name: 'Nodereal',
