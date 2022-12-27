@@ -52,6 +52,15 @@ const nodes: Node[] = [
     loadTime: -1,
   },
   {
+    name: 'LlamaNodes',
+    endpoint: 'https://eth.llamarpc.com',
+    website: 'https://llamanodes.com/',
+    price: 'Freemium',
+    archive: true,
+    status: false,
+    loadTime: -1,
+  },
+  {
     name: 'Moralis',
     endpoint: `https://speedy-nodes-nyc.moralis.io/${process.env.MORALIS_KEY}/eth/mainnet/archive`,
     website: 'https://moralis.io/',
