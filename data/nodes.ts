@@ -257,8 +257,9 @@ async function checkNodeStatus(endpoint: string, authentication?: string | null)
   for (var i = 0; i < rounds; i++) {
       await timer(timeInterval)
       var result = await getFetchTime(endpoint, authentication)
-      if (result.status && i>0){
-        totalLoadTime += result.loadTime
+      if (result.status){
+        if(i>0)
+          totalLoadTime += result.loadTime
       }
       else{
         return({
@@ -270,7 +271,7 @@ async function checkNodeStatus(endpoint: string, authentication?: string | null)
 
   return({
     status: true,
-    loadTime: totalLoadTime/rounds
+    loadTime: totalLoadTime/(rounds-1)
   })
 }
 
