@@ -60,6 +60,14 @@ const nodes: Node[] = [
     loadTime: -1,
   },
   {
+    name: 'Blast',
+    endpoint: 'https://eth-mainnet.public.blastapi.io',
+    website: 'https://blastapi.io/',
+    price: 'Free',
+    status: false,
+    loadTime: -1,
+  },
+  {
     name: 'Blockscout',
     endpoint: 'https://mainnet-nethermind.blockscout.com/',
     website: 'https://blockscout.com',
