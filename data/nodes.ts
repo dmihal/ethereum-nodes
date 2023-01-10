@@ -272,7 +272,6 @@ async function getFetchTime(endpoint: string, authentication?: string | null): P
       };
     } else {
       let loadTime = finish(start, endpoint);
-      console.log("success");
       console.log(endpoint);
       console.log(await result.text());
       return {
