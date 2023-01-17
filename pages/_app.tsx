@@ -41,17 +41,20 @@ const App: React.FC<AppProps> = ({ Component, pageProps }) => {
       <style jsx>{`
         .container {
           min-height: 100vh;
-          padding: 0.5rem;
           display: flex;
           flex-direction: column;
           justify-content: center;
           align-items: center;
+          background: radial-gradient(
+            83.98% 83.98% at 50% 16.02%,
+            #f5fffa 0%,
+            #ffffff 100%
+          );
         }
 
         footer {
           width: 100%;
           height: auto;
-          border-top: 1px solid lightGray;
           text-align: center;
           padding: 2rem 0;
         }
