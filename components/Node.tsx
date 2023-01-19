@@ -6,11 +6,6 @@ interface NodeProps {
 }
 
 const Node: React.FC<NodeProps> = ({ node }) => {
-  const selectAll = (event: any) => event.target.select();
-  const nodeStatus = node.status;
-
-  // {`node ${nodeStatus ? 'up' : 'down'}`}
-
   return (
     <div className="individual-node">
         <div className='provider'><p style={{padding:'0', margin:'0'}}>{node.name}</p></div>
