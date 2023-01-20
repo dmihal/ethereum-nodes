@@ -3,24 +3,36 @@ import { Node as NodeType } from 'data/nodes';
 
 interface NodeProps {
   node: NodeType;
+  index: number;
 }
 
-const Node: React.FC<NodeProps> = ({ node }) => {
-  const selectAll = (event: any) => event.target.select();
-  const nodeStatus = node.status;
+const Node: React.FC<NodeProps> = ({ node, index }) => {
+  
 
-  // {`node ${nodeStatus ? 'up' : 'down'}`}
-
+  const copyContent = async (text:string) => {
+    if(node.price === 'Free') {
+    try {
+      await navigator.clipboard.writeText(text);
+      let copied:HTMLElement = document.getElementById(index.toString()) as HTMLElement
+      copied.innerText = "Copied!"
+      console.log('Content copied to clipboard');
+    } catch (err) {
+      console.error('Failed to copy: ', err);
+    }
+  }
+}
+  
   return (
+   
+
     <div className="individual-node">
         <div className='provider'><p style={{padding:'0', margin:'0'}}>{node.name}</p></div>
       <div className="speed">
         <span >Load time: {node.loadTime < 0 ? '∞' : `${node.loadTime}ms`}</span>
       </div>
       <div className="price"><span>{node.price}</span></div>
-      <div className="endpoint"><a href={node.websiteURL || node.website}>{node.price === 'Free' ? "Copy RPC URL" : "Get API key"}</a></div>
-   
-
+      <button onClick={() => copyContent(node.endpoint as string)} className="endpoint"><a id={index.toString()}  href={node.price === 'Free' ? void(0) : node.website}>{node.price === 'Free' ? "Copy RPC URL" : "Get API key"}</a></button>
+    
       <style jsx>{`
 
         .individual-node {
@@ -32,8 +44,6 @@ const Node: React.FC<NodeProps> = ({ node }) => {
           width: 100%;
           color: black;
           align-items: flex-start;
-          font-family: "Inter";
-          font-style: normal;
           font-weight: 400;
           font-size: 16px;
 
@@ -44,6 +54,17 @@ const Node: React.FC<NodeProps> = ({ node }) => {
 
         }
 
+        // .undefined {
+        //   width:100%;
+        //   color: black;
+        //   display: flex;
+        //   flex-direction: row;
+        //   justify-content: center;
+        //   align-items:center;
+
+        // }
+
+      
         .speed {
           width: 25%;
         }
@@ -57,15 +78,17 @@ const Node: React.FC<NodeProps> = ({ node }) => {
           text-align: right;
           width: 25%;
           justify-content: end;
+          background:none;
+          border:none;
         }
         .endpoint a {
-          font-family: 'Inter';
-          font-style: normal;
           font-weight: 700;
           font-size: 16px;
           text-decoration:none;
           color: #51BA86;
         }
+
+
 
         .endpoint a:hover {
           text-decoration:underline;

@@ -34,7 +34,6 @@ const App: React.FC<AppProps> = ({ Component, pageProps }) => {
         <Component {...pageProps} />
 
         <footer>
-          <div>Created by <a href="https://twitter.com/dmihal" target="twitter">David Mihal</a></div>
         </footer>
       </PlausibleProvider>
 
@@ -43,7 +42,6 @@ const App: React.FC<AppProps> = ({ Component, pageProps }) => {
           min-height: 100vh;
           display: flex;
           flex-direction: column;
-          justify-content: center;
           align-items: center;
           background: radial-gradient(
             83.98% 83.98% at 50% 16.02%,

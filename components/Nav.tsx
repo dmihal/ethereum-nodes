@@ -30,6 +30,17 @@ return (
 </span>
 
 <style jsx>{`
+@media (max-width: 564px) {
+  .metrics-container {
+    display:none;
+  }
+
+  .family-web {
+   display:none;
+  }
+
+}
+
 .nav-container {
   display:flex;
   justify-content: space-between;
@@ -59,6 +70,7 @@ return (
 
 }
 
+@media (min-width: 565px) {
 .metrics-container {
   display: flex;
   flex-direction: row;
@@ -71,6 +83,7 @@ return (
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.05);
   border-radius: 24px;
 }
+}
 
 p {
   padding:0px;
@@ -82,8 +95,6 @@ p {
   color:#0477F4;
   border-style:none;
   background: none;
-font-family: 'Inter';
-font-style: normal;
 font-weight: 500;
 font-size: 16px;
 line-height: 19px;

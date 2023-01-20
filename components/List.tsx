@@ -4,10 +4,13 @@ import Node from "./Node";
 
 interface ListProps {
   nodes: NodeType[];
+  selectedFilter: string;
 }
 
-const List: React.FC<ListProps> = ({ nodes }) => {
+const List: React.FC<ListProps> = ({ nodes, selectedFilter }) => {
   const [_nodes, setNodes] = useState(nodes);
+  const [nullCheck, setNullCheck ]= useState([]);
+
   useEffect(() => {
     let infiniteNodes = nodes.filter((node) => node.loadTime === -1);
     let sortedNodes = nodes
@@ -15,7 +18,11 @@ const List: React.FC<ListProps> = ({ nodes }) => {
       .sort((nodeA, nodeB) => nodeA.loadTime - nodeB.loadTime)
       .sort((node) => (node.status ? 0 : 1));
     setNodes([...sortedNodes, ...infiniteNodes]);
+    setNullCheck(_nodes.filter((node) => node.price === selectedFilter) as [])
+
   }, [nodes]);
+
+
 
   return (
     <div className="wrapper">
@@ -26,18 +33,27 @@ const List: React.FC<ListProps> = ({ nodes }) => {
         <p className="action-tab">Action</p>
       </div>
 
-      {_nodes.map((node) => (
-        <span key={node.name}>
-          <Node node={node} />
+      {nullCheck.length === 0 ? (
+        <span>
+          <div className="undefined">None Found</div>
         </span>
-      ))}
+      ) : (
+        _nodes
+          .filter((node) => node.price === selectedFilter)
+          .map((node, index) => (
+            <span key={node.name}>
+              <Node node={node} index={index}/>
+            </span>
+          ))
+      )}
       <style jsx>{`
         .wrapper {
-          margin: 0;
           display: flex;
           flex-wrap: wrap;
           justify-content: center;
+          min-width: 700px;
           max-width: 700px;
+           margin:auto;
           border: 1px solid #c9e6d7;
           background: #ffffff;
           filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))
@@ -62,6 +78,17 @@ const List: React.FC<ListProps> = ({ nodes }) => {
         .provider-tab {
           width: 25%;
         }
+        .undefined {
+          padding: 20px 20px;
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          width: 100%;
+          color: black;
+          align-items: center;
+          font-weight: 400;
+          font-size: 16px;
+        }
 
         .load-tab {
           width: 25%;
@@ -81,7 +108,7 @@ const List: React.FC<ListProps> = ({ nodes }) => {
         span {
           display: block;
           width: 100%;
-          border-bottom:1px solid #DDDDDD;
+          border-bottom: 1px solid #dddddd;
         }
       `}</style>
     </div>
