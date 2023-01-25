@@ -110,6 +110,10 @@ const List: React.FC<ListProps> = ({ nodes, selectedFilter }) => {
           width: 100%;
           border-bottom: ${theme === 'light' ? "1px solid #292929": "1px solid #DDDDDD"}
         }
+
+        span:nth-last-child(-n + 1) {
+          border: none;
+        }
       `}</style>
     </div>
   );
