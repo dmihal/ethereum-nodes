@@ -1,14 +1,16 @@
 import React from "react";
+import { useTheme } from 'next-themes'
 
 const Footer: React.FC = () => {
+  const { theme} = useTheme()
   return (
     <div className="footer-container">
       <span className="social-div">
         <p>Find us here:</p>
         <span>
-          <img src="twitter.svg" />
-          <img src="github.svg" />
-          <img src="discord.svg" />
+          <img src={theme === 'light'?"twitter-blue.svg" : "twitter.svg"} />
+          <img src={theme === 'light'? "github-blue.svg": "github.svg" }/>
+          <img src={theme === 'light'? "discord-blue.svg": "discord.svg"} />
         </span>
       </span>
       <span className="metrics-container">
@@ -23,7 +25,7 @@ const Footer: React.FC = () => {
           }
 
           .show-button {
-            color: #0477f4;
+            color: ${theme === 'light' ? "#FFFFFF" :"#0477F4" };
             border-style: none;
             background: none;
             font-weight: 500;
@@ -35,6 +37,8 @@ const Footer: React.FC = () => {
             margin: 0;
             width: fit-content;
             padding: 0px;
+            color: ${theme === 'light' ? "#0477F4": "#000000" };
+            
           }
 
           .add-provider {
@@ -48,8 +52,8 @@ const Footer: React.FC = () => {
             padding: 2px 16px;
             justify-content: center;
             gap: 5px;
-            background: #ffffff;
-            border: 1px solid #dddddd;
+            background: ${theme === 'light' ? "#000000": "#FFFFFF"};
+            border: 1px solid ${theme === 'light' ?"#0477F4" : "#DDDDDD"};
             box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.05);
             border-radius: 24px;
             margin:auto;
@@ -72,6 +76,7 @@ const Footer: React.FC = () => {
             justify-content: center;
             gap: 7px;
             width: fit-content;
+            color: ${theme === 'light'? "#0477F4" : "#000000"}
           }
           .social-div img {
             padding: 0 7px;

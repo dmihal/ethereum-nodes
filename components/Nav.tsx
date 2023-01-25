@@ -1,10 +1,10 @@
-import React, {useState} from "react"
+import React from "react"
+import { useTheme } from 'next-themes'
 
 
 
 const Nav:React.FC = () => {
-const [mode,setMode] = useState('day')
-
+  const { theme, setTheme } = useTheme()
 return (
 
 <div className="nav-container">
@@ -15,17 +15,17 @@ return (
 
 
 <span className="title-container">
-  <img width="50%" src="/logo.svg"/>
+  <img width="50%" src={theme === 'light' ? "/logo-dark.svg": "/logo.svg"}/>
   <p className="family-web">Family website</p>
 </span>
 
 
 <span className="row-container">
-<button onClick={() => setMode('day')} className="day-toggle">
-  <img src="/sun.png"/>
+<button onClick={() => setTheme('dark')} className="day-toggle">
+  <img src={theme === 'light' ? "/sun-blue.png": "/sun.png"}/>
 </button>
-<button onClick={() => setMode('night')} className="night-toggle">
-<img src="/moon.png"/>
+<button onClick={() => setTheme('light')} className="night-toggle">
+<img src= "/moon.png"/>
 </button>
 </span>
 
@@ -44,7 +44,7 @@ return (
 .nav-container {
   display:flex;
   justify-content: space-between;
-  background: #FFFFFF;
+  background: ${theme === 'light' ? "#000000" : "#FFFFFF" };
   box-shadow: 0px 14px 40px rgba(0, 0, 0, 0.05);
   width: 100%;
   padding: 12px 20px;
@@ -78,8 +78,8 @@ return (
   padding: 2px 16px;
   justify-content:center;
   gap: 5px;  
-  background: #FFFFFF;
-  border: 1px solid #DDDDDD;
+  background: ${theme === 'light' ? "#000000": "#FFFFFF"};
+  border: 1px solid ${theme === 'light' ?"#0477F4" : "#DDDDDD"};
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.05);
   border-radius: 24px;
 }
@@ -88,11 +88,12 @@ return (
 p {
   padding:0px;
   margin: 0px;
+  color: ${theme === 'light' ? "#0477F4": "#000000" };
 
 }
 
 .show-button {
-  color:#0477F4;
+color: ${theme === 'light' ? "#FFFFFF" :"#0477F4" };
   border-style:none;
   background: none;
 font-weight: 500;
@@ -104,18 +105,18 @@ line-height: 19px;
 .night-toggle {
   display:flex;
   align-items:center;
-  background:${mode === 'night'? '#BDD0F6': '#EEF1F7' };
+  background:${theme === 'light'? '#0477F4': '#FFFFFF' };
+  border:1px solid ${theme === 'light' ? "#0477F4" :"transparent" };
   border-radius: 0px 4px 4px 0px;
-  border-style:none;
   padding:7px;
 }
 
 .day-toggle {
   display:flex;
   align-items:center;
-  background:${mode === 'day'?'#BDD0F6' : '#EEF1F7' };
+  background:${theme === 'light'? '#000000':'#EEF1F7' };
+  border:1px solid ${theme === 'light' ? "#0477F4" :"transparent" };
   border-radius: 4px 0px 0px 4px;
-  border-style:none;
   padding:7px;
 }
 

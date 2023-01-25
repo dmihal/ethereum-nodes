@@ -1,5 +1,6 @@
 import React from 'react';
 import { Node as NodeType } from 'data/nodes';
+import { useTheme } from "next-themes";
 
 interface NodeProps {
   node: NodeType;
@@ -7,7 +8,7 @@ interface NodeProps {
 }
 
 const Node: React.FC<NodeProps> = ({ node, index }) => {
-  
+  const { theme} = useTheme()
 
   const copyContent = async (text:string) => {
     if(node.price === 'Free') {
@@ -42,7 +43,7 @@ const Node: React.FC<NodeProps> = ({ node, index }) => {
           flex-direction: row;
           justify-content: space-between;
           width: 100%;
-          color: black;
+          color: ${theme === 'light' ? "#FFFFFF": "#000000"}
           align-items: flex-start;
           font-weight: 400;
           font-size: 16px;
@@ -51,6 +52,7 @@ const Node: React.FC<NodeProps> = ({ node, index }) => {
         }
         .provider {
           width: 25%;
+          color: ${theme === 'light' ? "#FFFFFF": "#000000"}
 
         }
 
@@ -67,10 +69,12 @@ const Node: React.FC<NodeProps> = ({ node, index }) => {
       
         .speed {
           width: 25%;
+          color: ${theme === 'light' ? "#FFFFFF" : "#000000"}
         }
 
         .price {
           width: 25%;
+          color: ${theme === 'light' ? "#FFFFFF": "#000000"}
         }
 
         .endpoint {

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Node as NodeType } from "data/nodes";
 import Node from "./Node";
+import { useTheme } from "next-themes";
 
 interface ListProps {
   nodes: NodeType[];
@@ -10,6 +11,7 @@ interface ListProps {
 const List: React.FC<ListProps> = ({ nodes, selectedFilter }) => {
   const [_nodes, setNodes] = useState(nodes);
   const [nullCheck, setNullCheck ]= useState([]);
+  const { theme} = useTheme()
 
   useEffect(() => {
     let infiniteNodes = nodes.filter((node) => node.loadTime === -1);
@@ -52,10 +54,10 @@ const List: React.FC<ListProps> = ({ nodes, selectedFilter }) => {
           flex-wrap: wrap;
           justify-content: center;
           min-width: 700px;
-          max-width: 700px;
-           margin:auto;
-          border: 1px solid #c9e6d7;
-          background: #ffffff;
+          max-width: 960px;
+          margin:auto;
+          border: 1px solid ${theme === 'light' ? "#28362F" : "#C9E6D7"};
+          background: ${theme === 'light' ? "#1D1D1D": "#FFFFFF"};
           filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))
             drop-shadow(0px 0px 32px rgba(3, 17, 10, 0.13));
           border-radius: 10px;
@@ -70,8 +72,6 @@ const List: React.FC<ListProps> = ({ nodes, selectedFilter }) => {
           border-radius: 10px 10px 0 0;
           color: #ffffff;
           align-items: flex-start;
-          font-family: "Inter";
-          font-style: normal;
           font-weight: 400;
           font-size: 16px;
         }
@@ -108,7 +108,7 @@ const List: React.FC<ListProps> = ({ nodes, selectedFilter }) => {
         span {
           display: block;
           width: 100%;
-          border-bottom: 1px solid #dddddd;
+          border-bottom: ${theme === 'light' ? "1px solid #292929": "1px solid #DDDDDD"}
         }
       `}</style>
     </div>

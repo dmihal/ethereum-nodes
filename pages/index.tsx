@@ -4,6 +4,7 @@ import { getNodes, Node } from "data/nodes";
 import List from "components/List";
 import Nav from "components/Nav";
 import Footer from "components/Footer";
+import { useTheme } from 'next-themes'
 
 interface HomeProps {
   nodes: Node[];
@@ -11,9 +12,11 @@ interface HomeProps {
 
 export const Home: NextPage<HomeProps> = ({ nodes }) => {
   const [priceModel, setPriceModel] = useState("Free");
+  const { theme} = useTheme()
+  console.log(theme)
   return (
     <>
-      <Nav />
+      <Nav/>
       <div >
         <main>
           <p className="url">https://ethereumnodes.com</p>
@@ -89,6 +92,7 @@ export const Home: NextPage<HomeProps> = ({ nodes }) => {
             overflow-x:scroll;
             padding: 2rem 0 3rem;
             flex: 1;
+          
             margin:auto;
             display: flex;
             flex-direction: column;
@@ -96,6 +100,8 @@ export const Home: NextPage<HomeProps> = ({ nodes }) => {
           }
           .filterBy {
             display:none;
+            color: ${theme === 'light' ? "#FFFFFF": "#000000"};
+
           }
         
 
@@ -107,7 +113,7 @@ export const Home: NextPage<HomeProps> = ({ nodes }) => {
             padding: 4px 16px 4px 4px;
             margin: 32px 0px;
             gap: 1px;
-            background: #ffffff;
+            background: ${theme === 'light' ? "#000000":  "#FFFFFF"};
             border: 1px solid #919191;
             border-radius: 32px;
           }
@@ -138,7 +144,7 @@ export const Home: NextPage<HomeProps> = ({ nodes }) => {
             padding: 4px 16px 4px 4px;
             margin: 32px 0px;
             gap: 16px;
-            background: #ffffff;
+            background: ${theme === 'light' ? "#000000":  "#FFFFFF"};
             border: 1px solid #919191;
             border-radius: 32px;
           }
@@ -146,7 +152,7 @@ export const Home: NextPage<HomeProps> = ({ nodes }) => {
         
 
           .filterBy {
-            color: black;
+            color: ${theme === 'light' ? "#FFFFFF": "#000000"};
             margin: 0;
           }
         }
@@ -157,23 +163,26 @@ export const Home: NextPage<HomeProps> = ({ nodes }) => {
             border-style: none;
             background: none;
             padding: 4px 8px;
+            color:  ${theme === 'light' ? "#FFFFFF": "#000000"};
           }
-
+         
           .toggled {
             background: #82c5a3;
             border-radius: 50px;
             border-style: none;
             padding: 4px 8px;
-            color: white;
+            color: ${theme === 'light' ? "#FFFFFF" : "#000000"};
           }
 
           .url {
             background: #ffffff;
-            border: 1px solid #e7e7e7;
+            border: 1px solid ${theme === 'light' ?  "#494949" : "#000000"};
             border-radius: 32px;
             padding: 4px 16px;
             width:fit-content;
             margin:0 auto 10px auto;
+            background: ${theme === 'light' ?  "#000000" :"#FFFFFF"};
+            color: ${theme === 'light' ?  "#494949" : "#000000"};
           }
 
           .title a {
@@ -185,7 +194,7 @@ export const Home: NextPage<HomeProps> = ({ nodes }) => {
             font-size: 16px;
             line-height: 150%;
             text-align: center;
-            color: #091636;
+            color: ${theme === 'light' ? "#FFFFFF": "#000000"};
             max-width: 500px;
             margin:0 auto 10px auto;
           }
@@ -201,6 +210,7 @@ export const Home: NextPage<HomeProps> = ({ nodes }) => {
             line-height: 1.15;
             font-size: 4rem;
             margin:auto;
+            color: ${theme === 'light' ? "#FFFFFF": "#000000"};
           }
 
           .title,
