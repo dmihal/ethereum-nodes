@@ -182,7 +182,7 @@ export const Home: NextPage<HomeProps> = ({ nodes }) => {
             width:fit-content;
             margin:0 auto 10px auto;
             background: ${theme === 'light' ?  "#000000" :"#FFFFFF"};
-            color: ${theme === 'light' ?  "#494949" : "#000000"};
+            color: ${theme === 'light' ?  "#FFFFFF" : "#000000"};
           }
 
           .title a {

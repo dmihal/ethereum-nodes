@@ -84,7 +84,7 @@ const List: React.FC<ListProps> = ({ nodes, selectedFilter }) => {
           flex-direction: row;
           justify-content: center;
           width: 100%;
-          color: black;
+          color: ${theme === 'light' ? "white": "black" };
           align-items: center;
           font-weight: 400;
           font-size: 16px;
