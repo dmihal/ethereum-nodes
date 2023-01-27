@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NextPage, GetStaticProps } from "next";
 import { getNodes, Node } from "data/nodes";
 import List from "components/List";
@@ -12,8 +12,10 @@ interface HomeProps {
 
 export const Home: NextPage<HomeProps> = ({ nodes }) => {
   const [priceModel, setPriceModel] = useState("Free");
-  const { theme} = useTheme()
-  console.log(theme)
+  const { theme, setTheme} = useTheme()
+  useEffect(() => {
+  setTheme('dark')
+  }, [])
   return (
     <>
       <Nav/>
