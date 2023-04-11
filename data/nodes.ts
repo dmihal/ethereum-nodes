@@ -197,16 +197,6 @@ const nodes: Node[] = [
     secret: true,
   },
   {
-    name: 'ArchiveNode',
-    endpoint: `https://api.archivenode.io/${process.env.ARCHIVENODE_KEY}`,
-    website: 'https://archivenode.io/',
-    price: 'Free',
-    archive: true,
-    status: false,
-    loadTime: -1,
-    secret: true,
-  },
-  {
     name: 'Flux',
     endpoint: 'https://ethereumnodelight.app.runonflux.io',
     website: 'https://runonflux.io/',
