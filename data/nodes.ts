@@ -221,6 +221,16 @@ const nodes: Node[] = [
     status: false,
     loadTime: -1,
   },
+  {
+    name: 'GetBlock',
+    price: 'Freemium',
+    endpoint: `https://eth.getblock.io/${process.env.GETBLOCK_KEY}/mainnet/`,
+    website: 'https://getblock.io/',
+    websiteURL: 'https://account.getblock.io/sign-in?ref=ZGJlZGZhOGMtZmFmMy01OWYyLWI5M2MtMWJmNGE1NWQ4MzNi',
+    status: false,
+    loadTime: -1,
+    secret: true,
+  },
 ];
 
 function finish(start: number, endpoint: string) {
