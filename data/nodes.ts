@@ -128,6 +128,14 @@ const nodes: Node[] = [
     secret: true,
   },
   {
+    name: 'Payload',
+    endpoint: 'https://rpc.payload.de',
+    website: 'https://payload.de/',
+    price: 'Free',
+    status: false,
+    loadTime: -1,
+  },
+  {
     name: 'RIVET',
     endpoint: `https://${process.env.RIVET_KEY}.eth.rpc.rivet.cloud/`,
     website: 'https://rivet.cloud/',
