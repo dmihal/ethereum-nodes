@@ -190,7 +190,7 @@ const nodes: Node[] = [
     name: 'Chainstack',
     endpoint: `https://${process.env.CHAINSTACK_NODE}/`,
     website: 'https://chainstack.com/',
-    price: 'Freemium\n(CC required)',
+    price: 'Freemium',
     authentication: process.env.CHAINSTACK_AUTH || null,
     status: false,
     loadTime: -1,

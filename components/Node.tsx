@@ -1,82 +1,103 @@
 import React from 'react';
 import { Node as NodeType } from 'data/nodes';
+import { useTheme } from "next-themes";
 
 interface NodeProps {
   node: NodeType;
+  index: number;
 }
 
-const Node: React.FC<NodeProps> = ({ node }) => {
-  const selectAll = (event: any) => event.target.select();
-  const nodeStatus = node.status;
+const Node: React.FC<NodeProps> = ({ node, index }) => {
+  const { theme} = useTheme()
 
+  const copyContent = async (text:string) => {
+    if(node.price === 'Free') {
+    try {
+      await navigator.clipboard.writeText(text);
+      let copied:HTMLElement = document.getElementById(index.toString()) as HTMLElement
+      copied.innerText = "Copied!"
+      console.log('Content copied to clipboard');
+    } catch (err) {
+      console.error('Failed to copy: ', err);
+    }
+  }
+}
+  
   return (
-    <div className={`node ${nodeStatus ? 'up' : 'down'}`}>
-      <div className="top">
-        <h2>{node.name}</h2>
-        <span className="price">{node.price}</span>
-      </div>
-      <div>
-        <span className="speed">Load time: {node.loadTime < 0 ? '∞' : `${node.loadTime}ms`}</span>
-        <br/>
-        <span className={`status ${nodeStatus ? 'up' : 'down'}`}>
-          {nodeStatus ? 'Working' : 'Down'}
-        </span>
-      </div>
-      <div><a href={node.websiteURL || node.website}>{node.website}</a></div>
-      <div>
-        {node.endpoint ? (
-          <input value={node.endpoint} readOnly className="endpoint" onClick={selectAll} />
-        ) : 'Visit website to get API key'}
-      </div>
+   
 
+    <div className="individual-node">
+        <div className='provider'><p style={{padding:'0', margin:'0'}}>{node.name}</p></div>
+      <div className="speed">
+        <span >Load time: {node.loadTime < 0 ? '∞' : `${node.loadTime}ms`}</span>
+      </div>
+      <div className="price"><span>{node.price}</span></div>
+      <button onClick={() => copyContent(node.endpoint as string)} className="endpoint"><a id={index.toString()}  href={node.price === 'Free' ? void(0) : node.website}>{node.price === 'Free' ? "Copy RPC URL" : "Get API key"}</a></button>
+    
       <style jsx>{`
-        .node {
-          margin: 4px;
-          padding: 8px;
-          border: solid 1px #888888;
-          width: 250px;
-          height: 165px;
-        }
-        .node.down {
-          color: #999999;
-        }
-        .top {
+
+        .individual-node {
+
+          padding: 20px 20px;
           display: flex;
-          align-items: center;
+          flex-direction: row;
           justify-content: space-between;
-        }
-        h2 {
-          margin: 2px 0;
-          font-size: 18px;
-        }
-        .price {
-          color: #999999;
-          font-size: 14px;
-          white-space: pre-line;
-          text-align: right;
-        }
-        .status {
-          display: inline-block;
-          padding: 4px 10px;
-          margin-top: 8px;
-          border-radius: 20px;
-          color: white;
-        }
-        .status.up {
-          background: green;
-        }
-        .status.down {
-          background: red;
-        }
-        .endpoint {
           width: 100%;
+          color: ${theme === 'light' ? "#FFFFFF": "#000000"}
+          align-items: flex-start;
+          font-weight: 400;
+          font-size: 16px;
+
+
         }
+        .provider {
+          width: 25%;
+          color: ${theme === 'light' ? "#FFFFFF": "#000000"}
+
+        }
+
+        // .undefined {
+        //   width:100%;
+        //   color: black;
+        //   display: flex;
+        //   flex-direction: row;
+        //   justify-content: center;
+        //   align-items:center;
+
+        // }
+
+      
         .speed {
-          font-size: 12px;
-          border: 1px solid #999999;
-          border-radius: 4px;
-          padding: 2px 3px;
+          width: 25%;
+          color: ${theme === 'light' ? "#FFFFFF" : "#000000"}
         }
+
+        .price {
+          width: 25%;
+          color: ${theme === 'light' ? "#FFFFFF": "#000000"}
+        }
+
+        .endpoint {
+          display: flex;
+          text-align: right;
+          width: 25%;
+          justify-content: end;
+          background:none;
+          border:none;
+        }
+        .endpoint a {
+          font-weight: 700;
+          font-size: 16px;
+          text-decoration:none;
+          color: #51BA86;
+        }
+
+
+
+        .endpoint a:hover {
+          text-decoration:underline;
+        }
+
       `}</style>
     </div>
   );
