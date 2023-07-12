@@ -231,6 +231,14 @@ const nodes: Node[] = [
     loadTime: -1,
     secret: true,
   },
+  {
+    name: 'Amberdata',
+    endpoint: `https://rpc.web3api.io?x-api-key=${process.env.NEXT_APP_AMBERDATA}`,
+    website: 'https://amberdata.io/',
+    price: 'Freemium',
+    status: true,
+    secret: true,
+  },
 ];
 
 function finish(start: number, endpoint: string) {
