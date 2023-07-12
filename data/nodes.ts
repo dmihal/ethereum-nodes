@@ -246,17 +246,14 @@ interface Status {
   loadTime: number
 }
 
-async function checkNodeStatus(endpoint: string, authentication?: string | null): Promise<Status> {
-  const start = Date.now();
+async function getFetchTime(endpoint: string, authentication?: string | null): Promise<Status>{
   const headers: any = { 'Content-Type': 'application/json' };
   if (authentication) {
     headers['Authorization'] = `Basic ${base64.encode(authentication)}`
   }
-
-  try {
-    var result
-    try{
-      result = await fetch(endpoint, {
+  const start = Date.now();
+  try{
+    var result  = await fetch(endpoint, {
         method: 'POST',
         headers,
         body: JSON.stringify({
@@ -266,37 +263,57 @@ async function checkNodeStatus(endpoint: string, authentication?: string | null)
           params: [],
         }),
       })
-    }catch(err) {
-      return {
-        status: false,
-        loadTime: -1,
-      };
-    };
-    
     if (result.status !== 200) {
       console.log(endpoint, 'failed')
       console.log(await result.text());
       return {
-        status: false,
-        loadTime: -1,
+          status: false,
+          loadTime: -1,
       };
+    } else {
+      let loadTime = finish(start, endpoint);
+      console.log(endpoint);
+      console.log(await result.text());
+      return {
+        status: true,
+        loadTime:loadTime
+      }
     }
-    const json = await result.json();
-
-    let loadTime = finish(start, endpoint);
-    return {
-      status: !!json.result,
-      loadTime
-    };
   } catch (e: any) {
     console.warn(e.message || e);
-
-    let loadTime = finish(start, endpoint);
     return {
       status: false,
-      loadTime
+      loadTime:-1,
     };
   }
+}
+
+const timer = (ms:number) => new Promise(res => setTimeout(res, ms))
+
+async function checkNodeStatus(endpoint: string, authentication?: string | null): Promise<Status> {
+  var totalLoadTime = 0
+  var rounds = 6
+  var timeInterval = 100 //ms
+  
+  for (var i = 0; i < rounds; i++) {
+      await timer(timeInterval)
+      var result = await getFetchTime(endpoint, authentication)
+      if (result.status){
+        if(i>0)
+          totalLoadTime += result.loadTime
+      }
+      else{
+        return({
+          status: false,
+          loadTime: -1
+        })
+      }
+  }
+
+  return({
+    status: true,
+    loadTime: totalLoadTime/(rounds-1)
+  })
 }
 
 function checkNodeStatusWithTimeout(endpoint: string, timeout: number, authentication?: string | null) {
@@ -312,7 +329,7 @@ function checkNodeStatusWithTimeout(endpoint: string, timeout: number, authentic
 export function getNodes(): Promise<Node[]> {
   return Promise.all(nodes.map(async (node: Node) => {
     try {
-      let nodeInfo = await checkNodeStatusWithTimeout(node.endpoint!, 4000, node.authentication)
+      let nodeInfo = await checkNodeStatusWithTimeout(node.endpoint!, 20000, node.authentication)
       return {
         ...node,
         status: nodeInfo.status,
