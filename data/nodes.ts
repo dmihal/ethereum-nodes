@@ -231,6 +231,16 @@ const nodes: Node[] = [
     loadTime: -1,
     secret: true,
   },
+  {
+    name: 'Tenderly',
+    price: 'Freemium',
+    endpoint: `https://mainnet.gateway.tenderly.co/${process.env.TENDERLY_KEY}`,
+    website: 'https://tenderly.co/',
+    websiteURL: 'https://dashboard.tenderly.co/login',
+    status: false,
+    loadTime: -1,
+    secret: true,
+  },
 ];
 
 function finish(start: number, endpoint: string) {
